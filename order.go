@@ -8,15 +8,15 @@ const (
 )
 
 type Order struct {
-	Type OrderType
+	Type   OrderType
 	Amount uint64
-	Value uint64
+	Value  uint64
 }
 
-func NewOrder(orderType OrderType, amount, value unit64) *Order {
+func NewOrder(orderType OrderType, amount, value uint64) *Order {
 	order := new(Order)
-	order.type = OrderType
-	order.amount = amount
-	order.value = value
+	order.Type = orderType
+	order.Amount = amount
+	order.Value = value
 	return order
 }
