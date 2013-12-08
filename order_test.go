@@ -2,7 +2,13 @@ package gotrade
 
 import (
 	"testing"
+	"github.com/nu7hatch/gouuid"
 )
+
+func randomUser() (user *uuid.UUID) {
+	user, _ = uuid.NewV4()
+	return user
+}
 
 func TestOrderCreation(t *testing.T) {
 	var (
@@ -12,7 +18,7 @@ func TestOrderCreation(t *testing.T) {
 	amount = 1000
 	value_amount = 50
 	for _, buyOrSell := range []OrderType{Buy, Sell} {
-		order, err := NewOrder(buyOrSell, amount, value_amount)
+		order, err := NewOrder(buyOrSell, amount, value_amount, randomUser())
 		if err != nil {
 			t.Error("Error instantiating the Order")
 		}
@@ -29,7 +35,7 @@ func TestOrderCreation(t *testing.T) {
 }
 
 func TestBadInitValues(t *testing.T) {
-	order, err := NewOrder(OrderType(3), uint64(1000), uint64(100))
+	order, err := NewOrder(OrderType(3), uint64(1000), uint64(100), randomUser())
 	if err == nil {
 		t.Error("Order should not have been created with %v", OrderType(3))
 	}
