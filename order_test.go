@@ -12,7 +12,10 @@ func TestOrderCreation(t *testing.T) {
 	amount = 1000
 	value_amount = 50
 	for _, buyOrSell := range []OrderType{Buy, Sell} {
-		order := NewOrder(buyOrSell, amount, value_amount)
+		order, err := NewOrder(buyOrSell, amount, value_amount)
+		if err != nil {
+			t.Error("Error instantiating the Order")
+		}
 		if order.Type != buyOrSell {
 			t.Errorf("%v != %v", order.Type, buyOrSell)
 		}

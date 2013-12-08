@@ -1,5 +1,10 @@
 package gotrade
 
+import (
+	"errors"
+	"fmt"
+)
+
 type OrderType uint8
 
 const (
@@ -13,10 +18,11 @@ type Order struct {
 	Value  uint64
 }
 
-func NewOrder(orderType OrderType, amount, value uint64) *Order {
-	order := new(Order)
-	order.Type = orderType
-	order.Amount = amount
-	order.Value = value
-	return order
+// Create a new Order
+func NewOrder(orderType OrderType, amount, value uint64) (*Order, error) {
+	if orderType != Buy && orderType != Sell {
+		errorMsg := fmt.Sprintf("Invalid OrderType. Valid values are [%v, %v]", Buy, Sell)
+		return nil, errors.New(errorMsg)
+	}
+	return &Order{orderType, amount, value}, nil
 }
