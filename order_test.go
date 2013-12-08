@@ -27,3 +27,13 @@ func TestOrderCreation(t *testing.T) {
 		}
 	}
 }
+
+func TestBadInitValues(t *testing.T) {
+	order, err := NewOrder(OrderType(3), uint64(1000), uint64(100))
+	if err == nil {
+		t.Error("Order should not have been created with %v", OrderType(3))
+	}
+	if order != nil {
+		t.Error("Should have not gotten a valid Order")
+	}
+}
