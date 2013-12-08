@@ -28,3 +28,15 @@ func NewOrder(orderType OrderType, amount, value uint64, user *uuid.UUID) (*Orde
 	}
 	return &Order{orderType, amount, value, user}, nil
 }
+
+// Create a new Buy order
+func NewBuyOrder(amount, value uint64, user *uuid.UUID) (*Order) {
+	order, _ := NewOrder(Buy, amount, value, user)
+	return order
+}
+
+// Create a new Sell order
+func NewSellOrder(amount, value uint64, user *uuid.UUID) (*Order) {
+	order, _ := NewOrder(Sell, amount, value, user)
+	return order
+}

@@ -43,3 +43,23 @@ func TestBadInitValues(t *testing.T) {
 		t.Error("Should have not gotten a valid Order")
 	}
 }
+
+func TestBuyOrder(t *testing.T) {
+	order := NewBuyOrder(uint64(1000), uint64(100), randomUser())
+	if order == nil {
+		t.Error("Order wasn't created successfully")
+	}
+	if order.Type != Buy {
+		t.Error("Expecting a Buy order, but got %v", order.Type)
+	}
+}
+
+func TestSellOrder(t *testing.T) {
+	order := NewSellOrder(uint64(1000), uint64(100), randomUser())
+	if order == nil {
+		t.Error("Order wasn't created successfully")
+	}
+	if order.Type != Sell {
+		t.Error("Expecting a Sell order, but got %v", order.Type)
+	}
+}
